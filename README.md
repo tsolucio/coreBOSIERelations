@@ -9,11 +9,11 @@ This extension must be installed in both coreBOS applications. On one, you will 
 
 The export process will generate an XML file with all the necessary information to recover the relations in the destination installation. This information is fundamentally the autonumber identifier field and the internal crmid of the record.
 
-The way the records will be identified in the importing system will be either by the autonumber field or the crmid which was exported. This means that **you MUST** import this information in the destination system **first**.
+The way the records will be identified in the importing system will be either by the autonumber field or the CRMID which was exported. This means that **you MUST** import this information in the destination system **first**.
 
 ## Import
 
-The import process will read the XML file and establish the relations defined within it.
+The import process will read the XML file, search for the records using the autonumber or CRMID identifier from the origin installation, and establish the relation between the two modules.
 
 ## Process
 
@@ -31,8 +31,10 @@ The full process goes more or less like this:
     * Select the PreviousIDField where you imported the autonumber field on ModuleB
     * Select the XML file
     * Launch the import process
+  * Verify the import process
+  * Optionally delete or hide the PreviousIDField custom field
 
 ## Notes
 
-  * **One to many** relations are already supported, you just have to use the supported syntax and import in the correct order of dependencies of your modules.
-  * Only vtlib standard (_crmentityrel) many to many relations are currently supported. Donations and/or pull requests are welcome.
+  * **One to many** relations are already supported natively, you just have to use the supported syntax and import in the correct order of dependencies of your modules.
+  * Only vtlib standard (_crmentityrel) many to many relations are currently supported. Donations and/or pull requests are welcome to support custom many to many relation tables.

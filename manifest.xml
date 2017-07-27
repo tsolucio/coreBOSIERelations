@@ -1,5 +1,6 @@
 <?xml version='1.0'?>
 <module>
+<type>extension</type>
 <name>coreBOSIERelations</name>
 <label>coreBOSIERelations</label>
 <parent>Tools</parent>
