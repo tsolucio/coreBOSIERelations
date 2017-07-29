@@ -7,7 +7,27 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  ************************************************************************************/
-global $currentModule;
+require_once('Smarty_setup.php');
+require_once('data/Tracker.php');
+require_once('modules/Users/LoginHistory.php');
+require_once('modules/Users/Users.php');
+require_once('include/logging.php');
+require_once('include/utils/utils.php');
 
-echo "I/E Process";
+global $app_strings, $mod_strings, $current_language, $current_user, $adb, $theme, $currentModule;
+
+$log = LoggerManager::getLogger('IERelations');
+
+$theme_path="themes/".$theme."/";
+$image_path=$theme_path."images/";
+
+$smarty = new vtigerCRM_Smarty();
+
+$smarty->assign('MOD', $mod_strings);
+$smarty->assign('APP', $app_strings);
+$smarty->assign('THEME', $theme);
+$smarty->assign('IMAGE_PATH',$image_path);
+$smarty->assign('MODULELIST', getPicklistValuesSpecialUitypes(1613,'',''));
+
+$smarty->display('modules/coreBOSIERelations/index.tpl');
 ?>

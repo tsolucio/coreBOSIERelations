@@ -9,8 +9,12 @@
  ************************************************************************************/
 
 $mod_strings = Array(
-	'coreBOSIERelations' => 'ImportExport Relations',
-	'SINGLE_coreBOSIERelations' => 'ImportExport Relation',
+	'coreBOSIERelations' => 'Import/Export Relations',
+	'SINGLE_coreBOSIERelations' => 'Import/Export Relation',
+		'Export' => 'Export',
+		'Import' => 'Import',
+		'ModuleToExport' => 'Module To Export',
+		'ImportFile' => 'Import File',
 );
 
 ?>
