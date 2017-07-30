@@ -9,14 +9,19 @@
  ************************************************************************************/
 
 $mod_strings = Array(
-	'ModuleName' => 'Nome Modulo',
-	'SINGLE_ModuleName' => 'Nome Modulo',
-	'ModuleName ID' => 'ID Nome Modulo',
-
-	'LBL_CUSTOM_INFORMATION' => 'Informazione Personalizzata',
-	'LBL_MODULEBLOCK_INFORMATION' => 'Informazione Blocco del Modulo',
-
-	'ModuleFieldLabel' => 'Testo Etichetta Campo Modulo',
+	'coreBOSIERelations' => 'Import/Export Relations',
+	'SINGLE_coreBOSIERelations' => 'Import/Export Relation',
+	'Export' => 'Export',
+	'Import' => 'Import',
+	'ModuleToExport' => 'Module To Export',
+	'ImportFile' => 'Import File',
+	'SelectIDField' => 'Select ID Fields',
+	'RelateRecords' => 'Relate Records',
+	'Relating' => 'Relating',
+	'FoundRecords' => 'Found record with IDs',
+	'NotFoundRecords' => 'Record with IDs %s could not be found in field %s',
+	'Related with' => 'Related with',
+	'Process complete' => 'Process complete',
 );
 
 ?>

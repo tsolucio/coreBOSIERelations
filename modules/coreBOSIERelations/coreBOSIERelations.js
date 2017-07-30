@@ -6,7 +6,7 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  ************************************************************************************/
-
+jQuery.getScript('index.php?module=coreBOSIERelations&action=coreBOSIERelationsAjax&file=getjslanguage');
 var cbierels_es;
 
 function getRelatedModules(select) {
@@ -48,7 +48,7 @@ function launchImportProcess() {
 	let params = {};
 	while (i<sels.length) {
 		if (sels[i].value=='__none__') {
-			alert('You must select an ID field for all modules.');
+			alert(mod_alert_arr.ERR_SelectIDField);
 			return false;
 		}
 		params[sels[i].dataset.module] = sels[i].value;
@@ -65,7 +65,7 @@ function launchImportProcess() {
 		__addLog(result.message);
 
 		if (e.lastEventId == 'CLOSE') {
-			__addLog('<br><b>Process FINISHED!</b>');
+			__addLog('<br><b>' + mod_alert_arr.ProcessFINISHED + '!</b>');
 			cbierels_es.close();
 			var pBar = document.getElementById('progressor');
 			pBar.value = pBar.max; //max out the progress bar
@@ -79,15 +79,14 @@ function launchImportProcess() {
 	});
 
 	cbierels_es.addEventListener('error', function(e) {
-		__addLog('Error occurred');
+		__addLog(mod_alert_arr.ERR_Importing);
 		cbierels_es.close();
 	});
-
 }
 
 function stopTask() {
 	cbierels_es.close();
-	__addLog('Interrupted');
+	__addLog(mod_alert_arr.Interrupted);
 }
 
 function __addLog(message) {

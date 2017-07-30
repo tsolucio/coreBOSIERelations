@@ -9,8 +9,19 @@
  ************************************************************************************/
 
 $mod_strings = Array(
-	'coreBOSIERelations' => 'ImportarExportar Relaciones',
-	'SINGLE_coreBOSIERelations' => 'ImportarExportar Relaciones',
+	'coreBOSIERelations' => 'Importar/Exportar Relaciones',
+	'SINGLE_coreBOSIERelations' => 'Importar/Exportar Relaciones',
+	'Export' => 'Exportar',
+	'Import' => 'Importar',
+	'ModuleToExport' => 'Módulo a Exportar',
+	'ImportFile' => 'Fichero a Importar',
+	'SelectIDField' => 'Selecciona los campos Identificadores',
+	'RelateRecords' => 'Relaciona Registros',
+	'Relating' => 'Relacionando',
+	'FoundRecords' => 'Encontrado registro con IDs',
+	'NotFoundRecords' => 'No se ha podido encontro un registro con los IDs %s en el campo %s',
+	'Related with' => 'Relacionado con',
+	'Process complete' => 'Proceso completado',
 );
 
 ?>

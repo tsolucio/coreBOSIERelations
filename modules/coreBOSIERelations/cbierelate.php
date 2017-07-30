@@ -9,7 +9,7 @@
  ************************************************************************************/
 require_once 'modules/coreBOSIERelations/cbieopsutils.php';
 
-global $current_user;
+global $current_user, $mod_strings;
 
 header('Content-Type: text/event-stream');
 header('Cache-Control: no-cache'); // recommended to prevent caching of event data.
@@ -65,7 +65,7 @@ foreach ($iexml->relations->record as $record) {
 	$rs = $adb->pquery($mmsql,array($crmid,$anum));
 	if ($rs and $adb->num_rows($rs)>0) {
 		$localcrmid = $adb->query_result($rs,0,0);
-		$msg = "Found record with IDs <a href='index.php?module=$mainmodule&action=DetailView&record=$localcrmid'>$crmid/$anum</a><br>";
+		$msg = $mod_strings['FoundRecords'] . " <a href='index.php?module=$mainmodule&action=DetailView&record=$localcrmid'>$crmid/$anum</a><br>";
 		foreach ($record->modules->module as $relmod) {
 			$relcrmids = explode(',',(string)$relmod->relentityids);
 			$relanids = explode(',',(string)$relmod->relentityans);
@@ -81,15 +81,15 @@ foreach ($iexml->relations->record as $record) {
 			if (count($relwith)>0) {
 				relateEntities($mainmod['focus'], $mainmodule, $localcrmid, (string)$relmod->modulename, $relwith);
 			}
-			$msg.= '&nbsp;&nbsp;&nbsp;&nbsp;Related with '.$found.'/'.count($relcrmids).' '.(string)$relmod->modulename.'<br>';
+			$msg.= '&nbsp;&nbsp;&nbsp;&nbsp;' . $mod_strings['Related with'] . ' '.$found.'/'.count($relcrmids).' '.$relmods[(string)$relmod->modulename]['i18n'].'<br>';
 		}
 	} else {
-		$msg = "Record with IDs $crmid/$anum could not be found in field ".$params[$mainmodule];
+		$msg = sprintf($mod_strings['NotFoundRecords'],"$crmid/$anum",$params[$mainmodule]);
 	}
 	$recordprocessed++;
 	$progress = $recordprocessed / $recordcount * 100;
 	send_message($id++, $msg, $progress, $recordprocessed, $recordcount);
 }
 
-send_message('CLOSE', 'Process complete', 100, $recordcount, $recordcount);
+send_message('CLOSE', $mod_strings['Process complete'], 100, $recordcount, $recordcount);
 ?>

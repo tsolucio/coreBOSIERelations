@@ -16,8 +16,12 @@ $mod_strings = Array(
 	'ModuleToExport' => 'Module To Export',
 	'ImportFile' => 'Import File',
 	'SelectIDField' => 'Select ID Fields',
-	'RelateRecords' => 'RelateRecords',
+	'RelateRecords' => 'Relate Records',
 	'Relating' => 'Relating',
+	'FoundRecords' => 'Found record with IDs',
+	'NotFoundRecords' => 'Record with IDs %s could not be found in field %s',
+	'Related with' => 'Related with',
+	'Process complete' => 'Process complete',
 );
 
 ?>
