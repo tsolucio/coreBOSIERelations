@@ -11,10 +11,13 @@
 $mod_strings = Array(
 	'coreBOSIERelations' => 'Import/Export Relations',
 	'SINGLE_coreBOSIERelations' => 'Import/Export Relation',
-		'Export' => 'Export',
-		'Import' => 'Import',
-		'ModuleToExport' => 'Module To Export',
-		'ImportFile' => 'Import File',
+	'Export' => 'Export',
+	'Import' => 'Import',
+	'ModuleToExport' => 'Module To Export',
+	'ImportFile' => 'Import File',
+	'SelectIDField' => 'Select ID Fields',
+	'RelateRecords' => 'RelateRecords',
+	'Relating' => 'Relating',
 );
 
 ?>

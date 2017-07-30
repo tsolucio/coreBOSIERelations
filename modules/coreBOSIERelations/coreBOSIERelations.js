@@ -7,6 +7,8 @@
  * All Rights Reserved.
  ************************************************************************************/
 
+var cbierels_es;
+
 function getRelatedModules(select) {
 	document.getElementById('cbiespinner').classList.remove("hide");
 	fetch('index.php?module=coreBOSIERelations&action=coreBOSIERelationsAjax&file=cbieops&_op=getRelatedModules&mod=' + select.value, {
@@ -38,5 +40,59 @@ function setExportButtonState() {
 	btn.download = module + '_relationsexport.xml';
 	btn.style.visibility = (checked ? 'visible' : 'hidden');
 	return true;
+}
+
+function launchImportProcess() {
+	let sels = document.querySelectorAll('*[id^="cbieimportmoduleselect"]');
+	let i=0;
+	let params = {};
+	while (i<sels.length) {
+		if (sels[i].value=='__none__') {
+			alert('You must select an ID field for all modules.');
+			return false;
+		}
+		params[sels[i].dataset.module] = sels[i].value;
+		i++;
+	}
+	let rdo = document.getElementById('relresultssection');
+	rdo.style.visibility = 'visible';
+	cbierels_es = new EventSource('index.php?module=coreBOSIERelations&action=coreBOSIERelationsAjax&file=cbierelate&params='+encodeURIComponent(JSON.stringify(params)));
+
+	//a message is received
+	cbierels_es.addEventListener('message', function(e) {
+		var result = JSON.parse( e.data );
+
+		__addLog(result.message);
+
+		if (e.lastEventId == 'CLOSE') {
+			__addLog('<br><b>Process FINISHED!</b>');
+			cbierels_es.close();
+			var pBar = document.getElementById('progressor');
+			pBar.value = pBar.max; //max out the progress bar
+		} else {
+			var pBar = document.getElementById('progressor');
+			pBar.value = result.progress;
+			var perc = document.getElementById('percentage');
+			perc.innerHTML   = result.progress  + "% &nbsp;&nbsp;" + result.processed + '/' + result.total;
+			perc.style.width = (Math.floor(pBar.clientWidth * (result.progress/100)) + 15) + 'px';
+		}
+	});
+
+	cbierels_es.addEventListener('error', function(e) {
+		__addLog('Error occurred');
+		cbierels_es.close();
+	});
+
+}
+
+function stopTask() {
+	cbierels_es.close();
+	__addLog('Interrupted');
+}
+
+function __addLog(message) {
+	var r = document.getElementById('relresults');
+	r.innerHTML += message + '<br>';
+	r.scrollTop = r.scrollHeight;
 }
 

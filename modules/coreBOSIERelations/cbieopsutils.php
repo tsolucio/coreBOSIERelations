@@ -64,7 +64,6 @@ function __createExportFile($module,$relations) {
 			$q = __getRelatedModuleQuery($relinfo[$relmod],$module);
 			$xml->startElement("module");
 			$xml->writeElement('modulename', $relmod);
-			global $log;$log->fatal($q);$log->fatal(array($record,$modinfo));
 			if ($relinfo[$relmod]['idtable'] == 'vtiger_notes') {
 				$rsrel = $adb->pquery($q,array($record[$modinfo['idfield']]));
 			} else {
