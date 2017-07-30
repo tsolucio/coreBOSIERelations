@@ -27,9 +27,9 @@ The full process goes more or less like this:
   * Using coreBOSIERelations in the origin coreBOS,
     * Export the relation information between ModuleA and ModuleB
   * Using coreBOSIERelations in the destination coreBOS,
+    * Select the XML file
     * Select the PreviousIDField where you imported the autonumber field on ModuleA
     * Select the PreviousIDField where you imported the autonumber field on ModuleB
-    * Select the XML file
     * Launch the import process
   * Verify the import process
   * Optionally delete or hide the PreviousIDField custom field
@@ -46,4 +46,5 @@ Some uses of the extension are:
  - Share information between two or more coreBOS installations
  - Migrate information from a test install to a production system after validation
  - Mass relate many records
+ - Copy relations from one record to another
 
