@@ -7,6 +7,10 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  ************************************************************************************/
+/*
+ * This SSE is based on this article:
+ * http://www.htmlgoodies.com/beyond/php/show-progress-report-for-long-running-php-scripts.html
+ */
 require_once 'modules/coreBOSIERelations/cbieopsutils.php';
 
 global $current_user, $mod_strings;
