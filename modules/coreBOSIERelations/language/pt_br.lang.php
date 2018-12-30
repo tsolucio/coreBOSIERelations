@@ -8,20 +8,19 @@
  * All Rights Reserved.
  ************************************************************************************/
 
-$mod_strings = Array(
-	'coreBOSIERelations' => 'Import/Export Relations',
-	'SINGLE_coreBOSIERelations' => 'Import/Export Relation',
-	'Export' => 'Export',
-	'Import' => 'Import',
-	'ModuleToExport' => 'Module To Export',
-	'ImportFile' => 'Import File',
-	'SelectIDField' => 'Select ID Fields',
-	'RelateRecords' => 'Relate Records',
-	'Relating' => 'Relating',
-	'FoundRecords' => 'Found record with IDs',
-	'NotFoundRecords' => 'Record with IDs %s could not be found in field %s',
-	'Related with' => 'Related with',
-	'Process complete' => 'Process complete',
+$mod_strings = array(
+	'coreBOSIERelations' => 'Relações de Importação/Exportação',
+	'SINGLE_coreBOSIERelations' => 'Relação de Importação/Exportação',
+	'Export' => 'Exportação',
+	'Import' => 'Importação',
+	'ModuleToExport' => 'Módulo a Exportar',
+	'ImportFile' => 'Importar Ficheiro',
+	'SelectIDField' => 'Selecionar Campos de ID',
+	'RelateRecords' => 'Relacionar Registos',
+	'Relating' => 'A relacionar',
+	'FoundRecords' => 'Registos encontrados com IDs',
+	'NotFoundRecords' => 'Registos com IDs %s não foram encontrados no campo selecionado %s',
+	'Related with' => 'Relacionado com',
+	'Process complete' => 'Processo completo',
 );
-
 ?>
