@@ -1,6 +1,6 @@
 var mod_alert_arr = {
-	'ERR_SelectIDField':'You must select an ID field for all modules.',
-	'ERR_Importing':'An error occurred executing the relation process.',
-	'Interrupted':'Interrupted',
-	'ProcessFINISHED':'Process FINISHED'
+	'ERR_SelectIDField':'Deve selecionar um ID de campo para todos os módulos.',
+	'ERR_Importing':'Ocorreu um erro ao executar o processo de relação.',
+	'Interrupted':'Interrompido',
+	'ProcessFINISHED':'Processo TERMINADO'
 };
