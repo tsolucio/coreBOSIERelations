@@ -10,15 +10,15 @@ jQuery.getScript('index.php?module=coreBOSIERelations&action=coreBOSIERelationsA
 var cbierels_es;
 
 function getRelatedModules(select) {
-	document.getElementById('cbiespinner').classList.remove("hide");
+	document.getElementById('cbiespinner').classList.remove('hide');
 	fetch('index.php?module=coreBOSIERelations&action=coreBOSIERelationsAjax&file=cbieops&_op=getRelatedModules&mod=' + select.value, {
 		credentials: 'same-origin'
-	}).then(function(response) {
+	}).then(function (response) {
 		return response.text();
-	}).then(function(data) {
+	}).then(function (data) {
 		document.getElementById('relatedmodules').innerHTML = data;
 		setExportButtonState();
-		document.getElementById('cbiespinner').classList.add("hide");
+		document.getElementById('cbiespinner').classList.add('hide');
 	});
 }
 
@@ -59,26 +59,25 @@ function launchImportProcess() {
 	cbierels_es = new EventSource('index.php?module=coreBOSIERelations&action=coreBOSIERelationsAjax&file=cbierelate&params='+encodeURIComponent(JSON.stringify(params)));
 
 	//a message is received
-	cbierels_es.addEventListener('message', function(e) {
-		var result = JSON.parse( e.data );
+	cbierels_es.addEventListener('message', function (e) {
+		var result = JSON.parse(e.data);
 
 		__addLog(result.message);
 
+		var pBar = document.getElementById('progressor');
 		if (e.lastEventId == 'CLOSE') {
 			__addLog('<br><b>' + mod_alert_arr.ProcessFINISHED + '!</b>');
 			cbierels_es.close();
-			var pBar = document.getElementById('progressor');
 			pBar.value = pBar.max; //max out the progress bar
 		} else {
-			var pBar = document.getElementById('progressor');
 			pBar.value = result.progress;
 			var perc = document.getElementById('percentage');
-			perc.innerHTML   = result.progress  + "% &nbsp;&nbsp;" + result.processed + '/' + result.total;
+			perc.innerHTML   = result.progress  + '% &nbsp;&nbsp;' + result.processed + '/' + result.total;
 			perc.style.width = (Math.floor(pBar.clientWidth * (result.progress/100)) + 15) + 'px';
 		}
 	});
 
-	cbierels_es.addEventListener('error', function(e) {
+	cbierels_es.addEventListener('error', function (e) {
 		__addLog(mod_alert_arr.ERR_Importing);
 		cbierels_es.close();
 	});
@@ -94,4 +93,3 @@ function __addLog(message) {
 	r.innerHTML += message + '<br>';
 	r.scrollTop = r.scrollHeight;
 }
-

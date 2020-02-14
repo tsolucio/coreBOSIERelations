@@ -10,5 +10,5 @@
 global $currentModule;
 
 checkFileAccessForInclusion("modules/$currentModule/index.php");
-include_once("modules/$currentModule/index.php");
+include_once "modules/$currentModule/index.php";
 ?>

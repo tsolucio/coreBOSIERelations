@@ -8,7 +8,7 @@
  * All Rights Reserved.
  ************************************************************************************/
 
-$mod_strings = Array(
+$mod_strings = array(
 	'coreBOSIERelations' => 'Import/Export Relations',
 	'SINGLE_coreBOSIERelations' => 'Import/Export Relation',
 	'Export' => 'Export',
@@ -23,5 +23,4 @@ $mod_strings = Array(
 	'Related with' => 'Related with',
 	'Process complete' => 'Process complete',
 );
-
 ?>

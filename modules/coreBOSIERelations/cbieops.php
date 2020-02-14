@@ -7,13 +7,13 @@
  * Portions created by vtiger are Copyright (C) vtiger.
  * All Rights Reserved.
  ************************************************************************************/
-require_once('Smarty_setup.php');
+require_once 'Smarty_setup.php';
 require_once 'modules/coreBOSIERelations/cbieopsutils.php';
 $ret = array();
 switch ($_REQUEST['_op']) {
 	case 'getRelatedModules':
 		$mod = vtlib_purify($_REQUEST['mod']);
-		$relatedmods = __getcbIERelatedLists($mod,null);
+		$relatedmods = __getcbIERelatedLists($mod, null);
 		$smarty = new vtigerCRM_Smarty();
 		$smarty->assign('RELMODULELIST', $relatedmods);
 		$smarty->display('modules/coreBOSIERelations/relatedmodules.tpl');
@@ -21,8 +21,8 @@ switch ($_REQUEST['_op']) {
 		break;
 	case 'getXMLExport':
 		$module = vtlib_purify($_REQUEST['mod']);
-		$relations = explode(',', vtlib_purify(trim($_REQUEST['relmods'],',')));
-		__createExportFile($module,$relations);
+		$relations = explode(',', vtlib_purify(trim($_REQUEST['relmods'], ',')));
+		__createExportFile($module, $relations);
 		die();
 		break;
 	default:

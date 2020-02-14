@@ -10,7 +10,7 @@
 
 function __getcbIERelatedLists($module) {
 	global $log, $adb, $current_user;
-	$log->debug('Entering __getcbIERelatedLists(' . $module . ') method ...');
+	$log->debug('> __getcbIERelatedLists ' . $module);
 
 	$cur_tab_id = getTabid($module);
 
@@ -30,44 +30,44 @@ function __getcbIERelatedLists($module) {
 		$relationId = $adb->query_result($result, $i, 'relation_id');
 		$focus_list[$label] = array('related_tabid' => $rel_tab_id, 'relationId' => $relationId, 'actions' => $actions);
 	}
-	$log->debug("Exiting __getcbIERelatedLists method ...");
+	$log->debug('< __getcbIERelatedLists');
 	return $focus_list;
 }
 
-function __createExportFile($module,$relations) {
+function __createExportFile($module, $relations) {
 	global $adb;
 	$xml = new XMLWriter();
 	$xml->openMemory();
 	$xml->setIndent(true);
-	$xml->startDocument('1.0','UTF-8');
-	$xml->startElement("ierelations");
+	$xml->startDocument('1.0', 'UTF-8');
+	$xml->startElement('ierelations');
 	$xml->writeElement('origin', $module);
-	$xml->startElement("relatedmodules");
+	$xml->startElement('relatedmodules');
 	$relinfo = array();
 	foreach ($relations as $relmod) {
 		$xml->writeElement('module', $relmod);
 		$relinfo[$relmod] = __getrelmoduleinfo($relmod);
 	}
 	$xml->endElement();
-	$xml->startElement("relations");
+	$xml->startElement('relations');
 	$modinfo = __getrelmoduleinfo($module);
 	$q = __getMainModuleQuery($modinfo);
 	$rsm = $adb->query($q);
 	while ($record = $adb->fetch_array($rsm)) {
-		$xml->startElement("record");
-		$xml->startElement("entityid");
+		$xml->startElement('record');
+		$xml->startElement('entityid');
 		$xml->writeElement('crmid', $record[$modinfo['idfield']]);
 		$xml->writeElement('autonumid', $record[$modinfo['autonumfield']]);
 		$xml->endElement();
-		$xml->startElement("modules");
+		$xml->startElement('modules');
 		foreach ($relations as $relmod) {
-			$q = __getRelatedModuleQuery($relinfo[$relmod],$module);
-			$xml->startElement("module");
+			$q = __getRelatedModuleQuery($relinfo[$relmod], $module);
+			$xml->startElement('module');
 			$xml->writeElement('modulename', $relmod);
 			if ($relinfo[$relmod]['idtable'] == 'vtiger_notes') {
-				$rsrel = $adb->pquery($q,array($record[$modinfo['idfield']]));
+				$rsrel = $adb->pquery($q, array($record[$modinfo['idfield']]));
 			} else {
-				$rsrel = $adb->pquery($q,array($record[$modinfo['idfield']],$record[$modinfo['idfield']]));
+				$rsrel = $adb->pquery($q, array($record[$modinfo['idfield']],$record[$modinfo['idfield']]));
 			}
 			$relids = $relan = array();
 			while ($relrec = $adb->fetch_array($rsrel)) {
@@ -83,12 +83,11 @@ function __createExportFile($module,$relations) {
 	}
 	$xml->endElement();
 	$xml->endElement();
-	header("Pragma: public");
-	header("Expires: 0"); // set expiration time
-	header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-	header("Content-Type: application/force-download");
+	header('Pragma: public');
+	header('Expires: 0'); // set expiration time
+	header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 	header('Content-type: text/xml');
-	header("Content-Type: application/force-download");
+	header('Content-Type: application/force-download');
 	header('Content-Disposition: attachment; filename="'.$module.'_relationsexport.xml"');
 	echo $xml->outputMemory(true);
 }
@@ -99,8 +98,8 @@ function __getrelmoduleinfo($relmod) {
 	$focus = CRMEntity::getInstance($relmod);
 	$relinfo['idfield'] = $focus->table_index;
 	$relinfo['idtable'] = $focus->table_name;
-	$rsfld = $adb->pquery('select columnname,tablename from vtiger_field where tabid=? and uitype=?',array(getTabid($relmod),4));
-	if ($rsfld and $adb->num_rows($rsfld)>0) {
+	$rsfld = $adb->pquery('select columnname,tablename from vtiger_field where tabid=? and uitype=?', array(getTabid($relmod), 4));
+	if ($rsfld && $adb->num_rows($rsfld)>0) {
 		$relinfo['autonumfield'] = $adb->query_result($rsfld, 0, 'columnname');
 		$relinfo['autonumtable'] = $adb->query_result($rsfld, 0, 'tablename');
 	} else {
@@ -121,7 +120,7 @@ function __getMainModuleQuery($modinfo) {
 	return $q;
 }
 
-function __getRelatedModuleQuery($modinfo,$mainmodule) {
+function __getRelatedModuleQuery($modinfo, $mainmodule) {
 	$q = 'select '.$modinfo['idtable'].'.'.$modinfo['idfield'].','.$modinfo['autonumtable'].'.'.$modinfo['autonumfield'];
 	$q.= ' from '.$modinfo['idtable'];
 	$q.= ' inner join vtiger_crmentity on vtiger_crmentity.crmid='.$modinfo['idtable'].'.'.$modinfo['idfield'];
@@ -129,7 +128,7 @@ function __getRelatedModuleQuery($modinfo,$mainmodule) {
 		$q.= ' inner join '.$modinfo['autonumtable'].' on '.$modinfo['autonumtable'].'.'.$modinfo['idfield'].'='.$modinfo['idtable'].'.'.$modinfo['idfield'];
 	}
 	if ($modinfo['idtable'] == 'vtiger_notes') {
-		$q.= " inner join vtiger_senotesrel on (vtiger_crmentity.crmid=vtiger_senotesrel.notesid AND vtiger_senotesrel.crmid=?)";
+		$q.= ' inner join vtiger_senotesrel on (vtiger_crmentity.crmid=vtiger_senotesrel.notesid AND vtiger_senotesrel.crmid=?)';
 	} else {
 		$q.= " inner join vtiger_crmentityrel on (vtiger_crmentity.crmid=vtiger_crmentityrel.crmid AND vtiger_crmentityrel.relmodule='".$mainmodule."' AND vtiger_crmentityrel.relcrmid=?) OR
 			(vtiger_crmentity.crmid=vtiger_crmentityrel.relcrmid AND vtiger_crmentityrel.module='".$mainmodule."' AND vtiger_crmentityrel.crmid=?)";
@@ -137,5 +136,4 @@ function __getRelatedModuleQuery($modinfo,$mainmodule) {
 	$q.=' where deleted = 0';
 	return $q;
 }
-
 ?>
