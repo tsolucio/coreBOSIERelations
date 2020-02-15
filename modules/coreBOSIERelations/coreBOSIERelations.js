@@ -54,6 +54,7 @@ function launchImportProcess() {
 		params[sels[i].dataset.module] = sels[i].value;
 		i++;
 	}
+	params['ieformat'] = document.getElementById('ieformat').value;
 	let rdo = document.getElementById('relresultssection');
 	rdo.style.visibility = 'visible';
 	cbierels_es = new EventSource('index.php?module=coreBOSIERelations&action=coreBOSIERelationsAjax&file=cbierelate&params='+encodeURIComponent(JSON.stringify(params)));

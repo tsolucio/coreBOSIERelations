@@ -21,12 +21,14 @@
 		<div class="slds-col slds-has-flexi-truncate">
 			<div class="slds-media slds-no-space slds-grow">
 				<div class="slds-media__figure">
+					<a href="index.php?module=coreBOSIERelations&action=index">
 					<svg aria-hidden="true" class="slds-icon slds-icon-standard-user">
 						<use xlink:href="include/LD/assets/icons/utility-sprite/svg/symbols.svg#share"></use>
 					</svg>
+					</a>
 				</div>
 				<div class="slds-media__body">
-					<h1 class="slds-page-header__title slds-m-right--small slds-align-middle slds-truncate"
+					<h1 class="slds-page-header__title slds-m-right__small slds-align-middle slds-truncate"
 						title="{$MOD.coreBOSIERelations}">{$MOD.coreBOSIERelations}</h1>
 				</div>
 			</div>
@@ -49,7 +51,7 @@
 					</svg>
 				</div>
 				<div class="slds-media__body">
-					<h1 class="slds-page-header__title slds-m-right--small slds-align-middle slds-truncate"
+					<h1 class="slds-page-header__title slds-m-right__small slds-align-middle slds-truncate"
 						title="{$MOD.Export}">{$MOD.Export}</h1>
 				</div>
 			</div>
@@ -72,10 +74,10 @@
 </div>
 <div id="relatedmodules">
 </div>
-<div class="slds-align--absolute-center slds-p-top--large">
-<a class="slds-button slds-button_icon slds-button--icon-more" title="{$MOD.Export}" id="cbieexportbutton" style="visibility:hidden;"
+<div class="slds-align__absolute-center slds-p-top__large">
+<a class="slds-button slds-button_icon slds-button__icon-more" title="{$MOD.Export}" id="cbieexportbutton" style="visibility:hidden;"
 	href="index.php?module=coreBOSIERelations&action=coreBOSIERelationsAjax&file=cbieops&_op=getXMLExport&mod=&rels=" download="_relationsexport.xml">
-	<svg class="slds-button__icon cbslds-button--icon-more" aria-hidden="true">
+	<svg class="slds-button__icon cbslds-button__icon-more" aria-hidden="true">
 		<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="include/LD/assets/icons/utility-sprite/svg/symbols.svg#download"></use>
 	</svg>
 	<span class="slds-assistive-text">{$MOD.Export}</span></a>
@@ -91,7 +93,7 @@
 					</svg>
 				</div>
 				<div class="slds-media__body">
-					<h1 class="slds-page-header__title slds-m-right--small slds-align-middle slds-truncate"
+					<h1 class="slds-page-header__title slds-m-right__small slds-align-middle slds-truncate"
 						title="{$MOD.Import}">{$MOD.Import}</h1>
 				</div>
 			</div>
@@ -99,30 +101,52 @@
 	</div>
 	<div>
 	{if $SHOWIMPORTUPLOAD eq 'yes'}
-	<div class="slds-form-element">
-		<span class="slds-form-element__label"><br></span>
+	<form name="importupload" method="POST" ENCTYPE="multipart/form-data" action="index.php">
+	<div class="slds-grid slds-gutters">
+	<div class="slds-col slds-size_1-of-4">
 		<div class="slds-form-element__control">
-			<div class="slds-file-selector slds-file-selector_files">
-				<div class="slds-file-selector__dropzone">
-					<form name="importupload" method="POST" ENCTYPE="multipart/form-data" action="index.php">
-					<input type="hidden" name="module" value="coreBOSIERelations">
-					<input type="hidden" name="action" value="index">
-					<input type="hidden" name="_op" value="uploadimportfile">
-					<input type="file" class="slds-file-selector__input slds-assistive-text" accept="text/xml" id="xmlupload" name="xmlupload" aria-describedby="file-selector-id" onchange="form.submit();">
-					<label class="slds-file-selector__body" for="xmlupload">
-						<span class="slds-file-selector__button slds-button slds-button_neutral">
-							<svg class="slds-button__icon slds-button__icon_left" aria-hidden="true">
-							<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="include/LD/assets/icons/utility-sprite/svg/symbols.svg#upload"></use>
-							</svg>&nbsp;{$MOD.ImportFile}</span>
-						<span class="slds-file-selector__text slds-medium-show"></span>
-					</label>
-					</form>
+		<span class="slds-radio slds-m-top_small">
+			<input type="radio" id="xmlcsvxml" value="xml" name="xmlcsv" checked="" />
+			<label class="slds-radio__label" for="xmlcsvxml">
+				<span class="slds-radio_faux"></span>
+				<span class="slds-form-element__label">XML</span>
+			</label>
+		</span>
+		<span class="slds-radio slds-m-top_xx-small">
+			<input type="radio" id="xmlcsvcsv" value="csv" name="xmlcsv" />
+			<label class="slds-radio__label" for="xmlcsvcsv">
+			<span class="slds-radio_faux"></span>
+			<span class="slds-form-element__label">CSV</span>
+			</label>
+		</span>
+		</div>
+	</div>
+	<div class="slds-col slds-size_1-of-4">
+		<div class="slds-form-element">
+			<span class="slds-form-element__label"><br></span>
+			<div class="slds-form-element__control">
+				<div class="slds-file-selector slds-file-selector_files">
+					<div class="slds-file-selector__dropzone">
+						<input type="hidden" name="module" value="coreBOSIERelations">
+						<input type="hidden" name="action" value="index">
+						<input type="hidden" name="_op" value="uploadimportfile">
+						<input type="file" class="slds-file-selector__input slds-assistive-text" accept=".csv,text/xml" id="xmlupload" name="xmlupload" aria-describedby="file-selector-id" onchange="form.submit();">
+						<label class="slds-file-selector__body" for="xmlupload">
+							<span class="slds-file-selector__button slds-button slds-button_neutral">
+								<svg class="slds-button__icon slds-button__icon_left" aria-hidden="true">
+								<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="include/LD/assets/icons/utility-sprite/svg/symbols.svg#upload"></use>
+								</svg>&nbsp;{$MOD.ImportFile}</span>
+							<span class="slds-file-selector__text slds-medium-show"></span>
+						</label>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	</div>
+	</form>
 	{else}
-	{$MOD.SelectIDField}<br>
+	<label class="slds-form-element__label" for="selectexportmodule">{$MOD.SelectIDField}</label><br>
 	{foreach item=relmodinfo key=relmod from=$MAINMODTOSELECT}
 	<div class="slds-form-element">
 		<label class="slds-form-element__label" for="cbieimportmoduleselect{$relmod}">{$relmodinfo.i18n}</label>
@@ -157,9 +181,10 @@
 		</div>
 	</div>
 	{/foreach}
-	<div class="slds-align--absolute-center slds-p-top--large">
-	<button class="slds-button slds-button_icon slds-button--icon-more" title="{$MOD.RelateRecords}" id="cbieimportbutton" onclick="return launchImportProcess();">
-		<svg class="slds-button__icon cbslds-button--icon-more" aria-hidden="true">
+	<div class="slds-align_absolute-center slds-m-top_large">
+	<input type="hidden" name="ieformat" id="ieformat" value="{$IEFORMAT}">
+	<button class="slds-button slds-button_icon slds-button_icon-more" title="{$MOD.RelateRecords}" id="cbieimportbutton" onclick="return launchImportProcess();">
+		<svg class="slds-button__icon cbslds-button__icon-more" aria-hidden="true">
 			<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="include/LD/assets/icons/utility-sprite/svg/symbols.svg#upload"></use>
 		</svg>
 		<span class="slds-assistive-text">{$MOD.RelateRecords}</span>
@@ -181,7 +206,7 @@
 					</svg>
 				</div>
 				<div class="slds-media__body">
-					<h1 class="slds-page-header__title slds-m-right--small slds-align-middle slds-truncate"
+					<h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate"
 						title="{$MOD.Relating}">{$MOD.Relating}...</h1>
 				</div>
 			</div>

@@ -22,5 +22,6 @@ $mod_strings = array(
 	'NotFoundRecords' => 'No se ha podido encontro un registro con los IDs %s en el campo %s',
 	'Related with' => 'Relacionado con',
 	'Process complete' => 'Proceso completado',
+	'ERR_FileFormat' => 'Error en el Formato del Fichero de Importación',
 );
 ?>
