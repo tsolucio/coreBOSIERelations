@@ -45,7 +45,7 @@ The CSV import process expects a denormalized list of the relations between the 
 
 ### Process
 
-Let's suppose we have this CSV file to relate Accounts and Products
+An example CSV file to relate Accounts and Products would look like this
 
 | Accounts | Products |
 | ------------- | ------------- |
