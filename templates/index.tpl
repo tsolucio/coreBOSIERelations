@@ -16,7 +16,7 @@
 -->*}
 <script type="text/javascript" src="modules/coreBOSIERelations/coreBOSIERelations.js"></script>
 <br>
-<div class="slds-page-header slds-is-relative" role="banner">
+<div class="slds-page-header slds-is-relative slds-m-around_xx-small" role="banner">
 	<div class="slds-grid">
 		<div class="slds-col slds-has-flexi-truncate">
 			<div class="slds-media slds-no-space slds-grow">
@@ -40,7 +40,7 @@
 		<div class="slds-spinner__dot-b"></div>
 	</div>
 </div>
-<div class="slds-grid">
+<div class="slds-grid slds-card slds-m-around_xx-small">
 <div class="slds-box slds-col">
 	<div class="slds-page-header" role="banner">
 		<div class="slds-col slds-has-flexi-truncate">
